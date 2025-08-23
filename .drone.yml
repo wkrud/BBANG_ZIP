@@ -36,9 +36,12 @@ steps:
   - name: deploy
     image: appleboy/drone-scp
     settings:
-      host: $server_host         # 서버 IP
-      username: $server_user
-      password: $server_pass
+      host:
+        from_secret: server_host         # 서버 IP
+      username:
+        from_secret: server_user
+      password:
+        from_secret: server_pass
       port: 9988
       target: /home/wkrud/workspaces/bbang_zip_dev
       source: build/libs/*.jar    # 빌드된 JAR 파일
