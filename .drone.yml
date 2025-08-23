@@ -31,7 +31,8 @@ steps:
       - chmod +x ./gradlew
       #- ./gradlew clean build -x test
       - ./gradlew build -x test
-      -
+      - ls -l build/libs
+
   # 서버로 JAR 전송
   - name: deploy
     image: appleboy/drone-scp
