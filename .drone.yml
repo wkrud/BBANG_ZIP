@@ -39,7 +39,7 @@ steps:
       host: $server_host         # 서버 IP
       username: $server_user
       password: $server_pass
-      port: $server_port
+      port: 9988
       target: /home/wkrud/workspaces/bbang_zip_dev
       source: build/libs/*.jar    # 빌드된 JAR 파일
       strip_components: 0
