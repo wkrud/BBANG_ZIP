@@ -52,5 +52,17 @@ steps:
       - echo "DB_NAME=$DB_NAME"
       - mariadb -h $DB_HOST -u $DB_USER -p"$DB_PASS" --skip-ssl -e "SHOW TABLES;" $DB_NAME
 
+  - name: docker-build-run
+    image: docker:20.10.21
+    privileged: true
+    commands:
+      - docker build -t dev-bbang-zip .
+      - docker stop my-spring-app || true
+      - docker rm my-spring-app || true
+      - docker run -d \
+        --name my-spring-app \
+        -p 8088:8088 \
+        -v /var/log/app/devbbangzip:/app/logs \
+        dev-bbang-zip
 
 

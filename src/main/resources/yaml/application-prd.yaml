@@ -32,6 +32,12 @@ springdoc:
     display-request-duration: true
 
 logging:
+  file:
+    path: /var/log/app/devbbangzip
   level:
-    org.hibernate.SQL: info
-    org.hibernate.type.descriptor.sql.BasicBinder: warn
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: DEBUG
+    root: DEBUG       # 모든 패키지 로그 출력
+    org.springframework: DEBUG
+    com.mycompany: DEBUG  # 내가 만든 코드 로그
+
