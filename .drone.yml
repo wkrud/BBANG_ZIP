@@ -37,8 +37,8 @@ steps:
     image: appleboy/drone-scp
     settings:
       host: $server_host         # 서버 IP
-      username: $server_user      # SSH 사용자
-      password: $server_pass      # SSH 비밀번호 또는 private_key 사용 가능
+      username: $server_user
+      password: $server_pass
       port: $server_port
       target: /home/wkrud/workspaces/bbang_zip_dev
       source: build/libs/*.jar    # 빌드된 JAR 파일
