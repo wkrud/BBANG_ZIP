@@ -40,4 +40,5 @@ logging:
     root: DEBUG       # 모든 패키지 로그 출력
     org.springframework: DEBUG
     com.mycompany: DEBUG  # 내가 만든 코드 로그
+    com.zaxxer.hikari: WARN
 
