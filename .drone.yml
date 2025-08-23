@@ -2,16 +2,6 @@ kind: pipeline
 type: docker
 name: bbang-zip-deploy
 
-environment:
-  DB_USER:
-    from_secret: database_user
-  DB_PASS:
-    from_secret: database_pass
-  DB_HOST:
-    from_secret: database_host
-  DB_NAME:
-    from_secret: database_secret
-
 # Drone CI에서 사용하는 Runner
 # Runner가 Docker 기반이어야 MariaDB 접속/Gradle 빌드 가능
 steps:
@@ -19,6 +9,15 @@ steps:
   # 환경 변수 확인 (디버그용)
   - name: debug-env
     image: alpine
+    environment:
+      DB_USER:
+        from_secret: database_user
+      DB_PASS:
+        from_secret: database_pass
+      DB_HOST:
+        from_secret: database_host
+      DB_NAME:
+        from_secret: database_secret
     commands:
       - echo "DB_USER=$DB_USER"
       - echo "DB_PASS=$DB_PASS"
