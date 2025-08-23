@@ -1,0 +1,27 @@
+kind: pipeline
+type: docker
+name: bbang-zip-deploy
+
+environment:
+  DB_USER:
+    from_secret: DB_USER
+  DB_PASS:
+    from_secret: DB_PASS
+  DB_HOST:
+    from_secret: DB_HOST
+  DB_NAME:
+    from_secret: DB_NAME
+
+steps:
+  # Gradle Clean Build (테스트 생략)
+  - name: build
+    image: gradle:7.6-jdk17
+    commands:
+      - ./gradlew clean build -x test
+
+  # MariaDB 접속 확인
+  - name: db-check
+    image: mariadb:latest
+    commands:
+      - echo "DB 접속 테스트: $DB_USER@$DB_HOST/$DB_NAME"
+      - mysql -h $DB_HOST -u $DB_USER -p"$DB_PASS" -e "SHOW TABLES;" $DB_NAME

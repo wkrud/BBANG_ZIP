@@ -1,0 +1,7 @@
+spring:
+  config:
+    import:
+      - optional:classpath:/yaml/application-dev.yaml
+      - optional:classpath:/yaml/application-prd.yaml
+  profiles:
+    active: dev
