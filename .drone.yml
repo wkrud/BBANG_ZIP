@@ -31,7 +31,18 @@ steps:
       - chmod +x ./gradlew
       #- ./gradlew clean build -x test
       - ./gradlew build -x test
-
+      -
+  # 서버로 JAR 전송
+  - name: deploy
+    image: appleboy/drone-scp
+    settings:
+      host: $server_host         # 서버 IP
+      username: $server_user      # SSH 사용자
+      password: $server_pass      # SSH 비밀번호 또는 private_key 사용 가능
+      port: $server_port
+      target: /home/wkrud/workspaces/bbang_zip_dev
+      source: build/libs/*.jar    # 빌드된 JAR 파일
+      strip_components: 0
 
   # MariaDB 접속 확인
   - name: db-check
@@ -51,18 +62,4 @@ steps:
       - echo "DB_HOST=$DB_HOST"
       - echo "DB_NAME=$DB_NAME"
       - mariadb -h $DB_HOST -u $DB_USER -p"$DB_PASS" --skip-ssl -e "SHOW TABLES;" $DB_NAME
-
-  - name: docker-build-run
-    image: docker:20.10.21
-    privileged: true
-    commands:
-      - docker build -t dev-bbang-zip .
-      - docker stop my-spring-app || true
-      - docker rm my-spring-app || true
-      - docker run -d \
-        --name my-spring-app \
-        -p 8088:8088 \
-        -v /var/log/app/devbbangzip:/app/logs \
-        dev-bbang-zip
-
 
