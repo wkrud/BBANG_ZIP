@@ -34,8 +34,8 @@ steps:
   - name: db-check
     image: mariadb:latest
     commands:
-      - echo "DB 접속 테스트: $DB_USER@$DB_HOST/$DB_NAME"
-      - mysql -h $DB_HOST -u $DB_USER -p"$DB_PASS" -e "SHOW TABLES;" $DB_NAME
+      - echo "DB 접속 테스트 $DB_USER@$DB_HOST/$DB_NAME"
+      - mariadb -h $DB_HOST -u $DB_USER -p"$DB_PASS" -e "SHOW TABLES;" $DB_NAME
     environment:
       DB_USER:
         from_secret: DB_USER
