@@ -19,6 +19,7 @@ steps:
   - name: build
     image: gradle:7.6-jdk17
     commands:
+      - chmod +x ./gradlew
       - ./gradlew clean build -x test
     environment:
       DB_USER:
