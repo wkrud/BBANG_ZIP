@@ -45,8 +45,8 @@ steps:
         from_secret: server_pass
       port: 9988
       target: /home/wkrud/workspaces/bbang_zip_dev
-      source: /drone/src/build/libs/RLA_BBANG_ZIP-0.0.1-SNAPSHOT.jar    # 빌드된 JAR 파일
-      strip_components: 0
+      source: build/libs/RLA_BBANG_ZIP-0.0.1-SNAPSHOT.jar    # 빌드된 JAR 파일
+      strip_components: 2
 
   # MariaDB 접속 확인
   - name: db-check
