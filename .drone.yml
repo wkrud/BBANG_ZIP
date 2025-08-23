@@ -2,8 +2,20 @@ kind: pipeline
 type: docker
 name: bbang-zip-deploy
 
+# Drone CI에서 사용하는 Runner
+# Runner가 Docker 기반이어야 MariaDB 접속/Gradle 빌드 가능
 steps:
-  # Gradle Clean Build (테스트 생략)
+
+  # 환경 변수 확인 (디버그용)
+  - name: debug-env
+    image: alpine
+    commands:
+      - echo "DB_USER=$DB_USER"
+      - echo "DB_PASS=$DB_PASS"
+      - echo "DB_HOST=$DB_HOST"
+      - echo "DB_NAME=$DB_NAME"
+
+  # Gradle Build (테스트 제외)
   - name: build
     image: gradle:7.6-jdk17
     commands:
@@ -24,3 +36,14 @@ steps:
     commands:
       - echo "DB 접속 테스트: $DB_USER@$DB_HOST/$DB_NAME"
       - mysql -h $DB_HOST -u $DB_USER -p"$DB_PASS" -e "SHOW TABLES;" $DB_NAME
+    environment:
+      DB_USER:
+        from_secret: DB_USER
+      DB_PASS:
+        from_secret: DB_PASS
+      DB_HOST:
+        from_secret: DB_HOST
+      DB_NAME:
+        from_secret: DB_NAME
+
+
