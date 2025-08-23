@@ -36,6 +36,15 @@ steps:
   # MariaDB 접속 확인
   - name: db-check
     image: mariadb:latest
+    environment:
+      DB_USER:
+        from_secret: database_user
+      DB_PASS:
+        from_secret: database_pass
+      DB_HOST:
+        from_secret: database_host
+      DB_NAME:
+        from_secret: database_name
     commands:
       - echo "DB_USER=$DB_USER"
       - echo "DB_PASS=$DB_PASS"
