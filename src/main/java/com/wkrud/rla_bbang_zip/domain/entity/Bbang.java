@@ -26,6 +26,11 @@ public class Bbang {
     @JoinColumn(name = "bbang_zip_id")
     private BbangZip bbangZip;
 
-    private int rankScore;
+    private String info;
+
+    private String cre_dt;
+
+    private String upd_dt;
+
 
 }

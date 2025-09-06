@@ -1,7 +1,10 @@
 package com.wkrud.rla_bbang_zip.domain.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 
 @Entity
@@ -10,25 +13,20 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BbangZip {
+public class BbangZipRating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @Column(name = "bbang_zip_name", nullable = false)
-    private String name;
+    private String user_id;
 
-    private String addr;
+    private String bbang_zip_id;
 
-    private String addr_dtl;
+    private String score;
 
-    private String lat;
-
-    private String lot;
-
-    private String info;
+    private String comment;
 
     private String cre_dt;
 

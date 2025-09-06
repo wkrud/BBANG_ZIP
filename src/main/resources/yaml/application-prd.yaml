@@ -14,7 +14,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update        # 운영 환경은 update 대신 validate 추천
+      ddl-auto: create        # 운영 환경은 update 대신 validate 추천
     show-sql: true             # 운영 환경은 show-sql 끄는게 안전
     database-platform: org.hibernate.dialect.MariaDBDialect
     properties:
